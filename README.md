@@ -1,11 +1,11 @@
 Phonebook 📞
 
 Technology used:
-NodeJS
-Express.js
-MongoDB
-Mongoose
-SendGrid
+ - NodeJS
+ - Express.js
+ - MongoDB
+ - Mongoose
+ - SendGrid
 
 Why NodeJS:
  1. Uses JavaScript, which is easy to learn.
