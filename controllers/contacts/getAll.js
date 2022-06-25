@@ -4,8 +4,10 @@ const getAll = async (req, res, next) => {
   try {
     const { page = 1, limit = 20 } = req.query;
     const skip = (page - 1) * limit;
-    const total = await Contact.estimatedDocumentCount();
-    const contacts = await Contact.find({},"",{skip, limit:+limit});
+    const { count: total, rows: contacts } = await Contact.findAndCountAll({
+      offset: skip,
+      limit: +limit
+    });
     res.json({
       data: {
         total,
@@ -15,6 +17,7 @@ const getAll = async (req, res, next) => {
      });
   }
   catch (error) {
+    console.log(error);
     next(error);
   }
 }

@@ -15,7 +15,9 @@ const updateAvatar = async (req, res) => {
         await file.resize(250, 250).write(tpmName);
         await fs.rename(tpmName, uploadPath);
         const avatarURL = `/avatars/${id}/${originalname}`;
-        await User.findByIdAndUpdate(id, { avatarURL });
+        await User.update({ avatarURL }, {
+            where: {id}
+        });
         res.json({
             avatarURL:avatarURL,
         })
@@ -25,7 +27,7 @@ const updateAvatar = async (req, res) => {
         await fs.unlink(tpmName);
         throw error;
     }
-  
+
 
 }
 

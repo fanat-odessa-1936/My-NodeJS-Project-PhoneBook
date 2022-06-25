@@ -1,42 +1,55 @@
-const { Schema, SchemaTypes, model } = require("mongoose");
-const Joi = require("joi");
+/**
+ *
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize').DataTypes} DataTypes
+ * @param {*} Joi
+ * @returns {{}}
+ */
+module.exports = (sequelize, DataTypes, Joi) => {
+    const Contact = sequelize.define('contact', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notNull: {
+                    msg: 'Set name for contact'
+                }
+            }
+        },
+        email: {
+            type: DataTypes.STRING
+        },
+        phone: {
+            type: DataTypes.STRING
+        },
+        favorite: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        }
+    }, {});
 
-const contactSchema = Schema({
-    name: {
-        type: String,
-        required: [true, 'Set name for contact'],
-    },
-    email: {
-        type: String,
-    },
-    phone: {
-        type: String,
-    },
-    favorite: {
-        type: Boolean,
-        default: false,
-    },
-      owner: {
-      type: SchemaTypes.ObjectId,
-      ref: 'user',
+    Contact.associate = function(models) {
+        Contact.belongsTo(models.User, {
+            as: 'author'
+        });
     }
-}, { versionKey: false, timetamps: true });
 
-const joiContactSchema = Joi.object({
-    name: Joi.string()
-        .min(3)
-        .max(30)
-        .required(),
-    email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-    phone: Joi.string()
-        .pattern(/^[' '\-()0-9]{3,30}$/)
-        .required(),
-});
+    const joiContactSchema = Joi.object({
+        name: Joi.string()
+          .min(3)
+          .max(30)
+          .required(),
+        email: Joi.string()
+          .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+        phone: Joi.string()
+          .pattern(/^[' '\-()0-9]{3,30}$/)
+          .required(),
+    });
 
-const Contact = model("contact", contactSchema);
+    console.log(typeof Contact);
 
-module.exports = {
-    Contact,
-    joiContactSchema
+    return {
+        Contact,
+        joiContactSchema
+    }
 }

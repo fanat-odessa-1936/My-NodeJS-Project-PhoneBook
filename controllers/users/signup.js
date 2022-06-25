@@ -12,7 +12,9 @@ const sendMail = require('../../utils');
 
 const signup = async (req, res, _) => {
     const { email, password } = req.body;
-    const userExist = await User.findOne({ email });
+    const userExist = await User.findOne({
+        where: { email }
+    });
     if (userExist) {
         throw new Conflict("Email in use")
     }

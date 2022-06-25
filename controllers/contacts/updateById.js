@@ -3,7 +3,9 @@ const { Contact } = require("../../models");
 const updateById = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const updateContact = await Contact.findByIdAndUpdate(contactId, req.body, {new:true});
+    const updateContact = await Contact.update(req.body, {
+      where: { id: contactId },
+    });
     if (!updateContact) {
       return res.status(404).json({
         'message': 'Not found'
