@@ -9,9 +9,12 @@ const updateFavorite = async (req, res, next) => {
             'message': 'missing field favorite'
         });
       }
-        const updateStatusContact = await Contact.update(favorite, {
+    await Contact.update(favorite, {
           where: { id: contactId },
-        });
+    });
+    const updateStatusContact = await Contact.findOne({
+      where: { id: contactId },
+    })
         if (!updateStatusContact) {
         return res.status(404).json({
             'message': 'Not found'

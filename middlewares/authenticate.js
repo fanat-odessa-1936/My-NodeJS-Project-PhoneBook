@@ -12,7 +12,7 @@ const authenticate = async (req, res, next) => {
         throw new Unauthorized("Not authorized");
         }
         const { id } = jwt.verify(token, SECRET_KEY);
-        const user = await User.findOne({ _id: id });
+        const user = await User.findOne({ id: id });
         if(!user){
             throw new Unauthorized("Not authorized");
         }

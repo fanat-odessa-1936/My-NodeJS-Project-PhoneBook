@@ -21,14 +21,14 @@ const login = async (req, res, next) => {
     }
 
     const payload = {
-        id: user._id
+        id: user.get('id')
     }
 
     const { SECRET_KEY } = process.env;
 
     const token = jwt.sign(payload, SECRET_KEY)
     await User.update({token}, {
-        where: {id: user._id}
+        where: {id: user.get('id')}
     })
     res.json({
         token:token,

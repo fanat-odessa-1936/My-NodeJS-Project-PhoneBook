@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env DB_HOST='postgres://ijhrwzmylodgmo:8b8e06cdb470862fb797bbe9bdbef199fb444ac31c9b1875dc9d3518b6c39a2a@ec2-44-205-41-76.compute-1.amazonaws.com:5432/db68mo4rt2ujuf' NODE_ENV=production node ./bin/server.js",
+    "start": "cross-env SECRET_KEY=1234 DB_HOST='postgres://keukiktxexlsbm:44b62e99dad4e65382c4e48891cacc2fc0c9f00e49bfa501d0678ea2ccab5f39@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/db7991mrflatok' NODE_ENV=production node ./bin/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
@@ -23,9 +23,9 @@
     "mongoose": "^6.0.2",
     "morgan": "1.10.0",
     "multer": "^1.4.3",
-    "sequelize": "^6.21.0",
-    "uuid": "^8.3.2",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "sequelize": "^6.21.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^7.19.0",

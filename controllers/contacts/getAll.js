@@ -9,7 +9,6 @@ const getAll = async (req, res, next) => {
       offset: skip,
       limit: +limit
     });
-    await sequelize.close();
     res.json({
       data: {
         total,
