@@ -10,7 +10,7 @@ const verify = async (req, res) => {
         throw new NotFound('User not found')
     }
     await User.update({ verifyToken: null, verify: true }, {
-        where: {id: user._id, }
+        where: {id: user.get('id'), }
     });
     res.send("<h2>Verification successful</h2>")
 };

@@ -4,7 +4,7 @@ const router = express.Router()
 
 const { users: ctrl } = require('../../controllers');
 
-const { joiUserSchema } = require("../../models/user");
+const { joiUserSchema } = require("../../models");
 const { validation, controllerWrapper, authenticate, upload } = require("../../middlewares");
 
 
