@@ -1,13 +1,15 @@
-const { Contact } = require("../../models");
+const { Contact, User, sequelize } = require("../../models");
 
 const getAll = async (req, res, next) => {
   try {
+    await Contact.sync();
     const { page = 1, limit = 20 } = req.query;
     const skip = (page - 1) * limit;
     const { count: total, rows: contacts } = await Contact.findAndCountAll({
       offset: skip,
       limit: +limit
     });
+    await sequelize.close();
     res.json({
       data: {
         total,
@@ -17,7 +19,6 @@ const getAll = async (req, res, next) => {
      });
   }
   catch (error) {
-    console.log(error);
     next(error);
   }
 }

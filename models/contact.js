@@ -28,12 +28,6 @@ module.exports = (sequelize, DataTypes, Joi) => {
         }
     }, {});
 
-    Contact.associate = function(models) {
-        Contact.belongsTo(models.User, {
-            as: 'author'
-        });
-    }
-
     const joiContactSchema = Joi.object({
         name: Joi.string()
           .min(3)
@@ -45,8 +39,6 @@ module.exports = (sequelize, DataTypes, Joi) => {
           .pattern(/^[' '\-()0-9]{3,30}$/)
           .required(),
     });
-
-    console.log(typeof Contact);
 
     return {
         Contact,

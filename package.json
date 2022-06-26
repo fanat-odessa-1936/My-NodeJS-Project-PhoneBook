@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./bin/server.js",
+    "start": "cross-env DB_HOST='postgres://ijhrwzmylodgmo:8b8e06cdb470862fb797bbe9bdbef199fb444ac31c9b1875dc9d3518b6c39a2a@ec2-44-205-41-76.compute-1.amazonaws.com:5432/db68mo4rt2ujuf' NODE_ENV=production node ./bin/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"

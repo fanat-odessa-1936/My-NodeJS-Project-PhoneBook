@@ -7,6 +7,11 @@
  */
 module.exports = (sequelize, DataTypes, Joi) => {
     const User = sequelize.define('user', {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -44,13 +49,7 @@ module.exports = (sequelize, DataTypes, Joi) => {
             defaultValue: false,
         },
         verifyToken: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notNull: {
-                    msg: 'Verify token is required'
-                }
-            }
+            type: DataTypes.STRING
         }
     }, {});
 
